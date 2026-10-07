@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fuel Inventory</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>⛽ Fuel Station Management System</h1>
+    <p>Fuel Inventory Management</p>
+
+</header>
+
+
+<div class="container">
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <div>
+            <h2>Fuel Inventory</h2>
+            <p>Live tank stock and fuel pricing</p>
+        </div>
+
+        <a href="/" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- INVENTORY TABLE -->
+
+    <div class="table-card">
+
+        <h3>Current Fuel Stock</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Fuel ID</th>
+                    <th>Fuel Name</th>
+                    <th>Fuel Code</th>
+                    <th>Tank</th>
+                    <th>Capacity</th>
+                    <th>Current Stock</th>
+                    <th>Price / Litre</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for item in inventory %}
+
+                <tr>
+
+                    <td>
+                        {{ item.fuel_id }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ item.fuel_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ item.fuel_code }}
+                    </td>
+
+                    <td>
+                        {{ item.tank_number }}
+                    </td>
+
+                    <td>
+                        {{ item.capacity_litres }} L
+                    </td>
+
+                    <td class="stock">
+                        {{ item.current_stock }} L
+                    </td>
+
+                    <td>
+                        ₹{{ item.price_per_litre }}
+                    </td>
+
+                    <td>
+
+                        <span class="status">
+                            {{ item.status }}
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- INFORMATION CARDS -->
+
+    <div class="cards">
+
+        {% for item in inventory %}
+
+        <div class="card">
+
+            <span class="card-label">
+                {{ item.tank_number }}
+            </span>
+
+            <h3>
+                {{ item.fuel_name }}
+            </h3>
+
+            <div class="value">
+                {{ item.current_stock }} L
+            </div>
+
+            <p>
+                Capacity: {{ item.capacity_litres }} L
+            </p>
+
+            <p>
+                Price: ₹{{ item.price_per_litre }} / L
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

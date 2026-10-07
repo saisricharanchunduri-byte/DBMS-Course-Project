@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Supplier Management</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>⛽ Fuel Station Management System</h1>
+    <p>Supplier Management</p>
+
+</header>
+
+
+<div class="container">
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <div>
+            <h2>Supplier Management</h2>
+            <p>Insert, view and delete supplier records</p>
+        </div>
+
+        <a href="/" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    {% if message %}
+
+    <div class="message">
+        {{ message }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- ADD SUPPLIER -->
+
+    <div class="form-card">
+
+        <h3>➕ Add New Supplier</h3>
+
+        <form action="/suppliers/add" method="post">
+
+            <div class="form-grid">
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Supplier Name"
+                    required
+                >
+
+                <input
+                    type="text"
+                    name="phone"
+                    placeholder="Phone Number"
+                    required
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                >
+
+                <input
+                    type="text"
+                    name="address"
+                    placeholder="Address"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                class="primary"
+                type="submit"
+            >
+                Add Supplier
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- SUPPLIER TABLE -->
+
+    <div class="table-card">
+
+        <h3>Supplier Records</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Supplier ID</th>
+                    <th>Supplier Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for supplier in suppliers %}
+
+                <tr>
+
+                    <td>
+                        {{ supplier.supplier_id }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ supplier.supplier_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ supplier.phone }}
+                    </td>
+
+                    <td>
+                        {{ supplier.email or '-' }}
+                    </td>
+
+                    <td>
+                        {{ supplier.address }}
+                    </td>
+
+                    <td>
+
+                        <form
+                            action="/suppliers/delete/{{ supplier.supplier_id }}"
+                            method="post"
+                            onsubmit="return confirmDelete();"
+                        >
+
+                            <button
+                                class="delete"
+                                type="submit"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

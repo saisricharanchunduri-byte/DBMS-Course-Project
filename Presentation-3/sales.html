@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sales Records</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>⛽ Fuel Station Management System</h1>
+    <p>Sales Management</p>
+
+</header>
+
+
+<div class="container">
+
+    <div class="page-title">
+
+        <div>
+            <h2>Sales Records</h2>
+            <p>View all fuel sales and payment transactions</p>
+        </div>
+
+        <a href="/" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="table-card">
+
+        <h3>Recent Sales</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Sale ID</th>
+                    <th>Fuel</th>
+                    <th>Dispenser</th>
+                    <th>Quantity</th>
+                    <th>Price / L</th>
+                    <th>Total Amount</th>
+                    <th>Payment Type</th>
+                    <th>Sale Time</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for sale in sales %}
+
+                <tr>
+
+                    <td>
+                        {{ sale.sale_id }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ sale.fuel_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ sale.dispenser_number }}
+                    </td>
+
+                    <td>
+                        {{ sale.quantity_litres }} L
+                    </td>
+
+                    <td>
+                        ₹{{ sale.price_per_litre }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ₹{{ sale.total_amount }}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        <span class="status">
+                            {{ sale.payment_type }}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        {{ sale.sale_time }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

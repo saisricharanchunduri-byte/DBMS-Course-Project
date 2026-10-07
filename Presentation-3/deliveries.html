@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fuel Deliveries</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>⛽ Fuel Station Management System</h1>
+    <p>Fuel Delivery Management</p>
+
+</header>
+
+
+<div class="container">
+
+    <div class="page-title">
+
+        <div>
+            <h2>Fuel Deliveries</h2>
+            <p>Supplier deliveries and tank replenishment records</p>
+        </div>
+
+        <a href="/" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="table-card">
+
+        <h3>Delivery Records</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Delivery ID</th>
+                    <th>Supplier</th>
+                    <th>Tank</th>
+                    <th>Fuel</th>
+                    <th>Delivery Date</th>
+                    <th>Quantity</th>
+                    <th>Cost / L</th>
+                    <th>Total Cost</th>
+                    <th>Invoice No.</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for delivery in deliveries %}
+
+                <tr>
+
+                    <td>
+                        {{ delivery.delivery_id }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ delivery.supplier_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ delivery.tank_number }}
+                    </td>
+
+                    <td>
+                        {{ delivery.fuel_name }}
+                    </td>
+
+                    <td>
+                        {{ delivery.delivery_date }}
+                    </td>
+
+                    <td>
+                        {{ delivery.quantity_litres }} L
+                    </td>
+
+                    <td>
+                        ₹{{ delivery.cost_per_litre }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ₹{{ delivery.total_cost }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ delivery.invoice_number }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

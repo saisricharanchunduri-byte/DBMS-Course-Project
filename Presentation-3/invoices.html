@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Credit Invoices</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>⛽ Fuel Station Management System</h1>
+    <p>Credit Invoice Management</p>
+
+</header>
+
+
+<div class="container">
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <div>
+            <h2>Credit Invoices</h2>
+            <p>Invoice and outstanding payment tracking</p>
+        </div>
+
+        <a href="/" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- INVOICE TABLE -->
+
+    <div class="table-card">
+
+        <h3>Invoice Records</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Customer</th>
+                    <th>Sale ID</th>
+                    <th>Invoice Date</th>
+                    <th>Total Amount</th>
+                    <th>Paid Amount</th>
+                    <th>Balance</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for invoice in invoices %}
+
+                <tr>
+
+                    <td>
+                        {{ invoice.invoice_id }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            {{ invoice.customer_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ invoice.sale_id }}
+                    </td>
+
+                    <td>
+                        {{ invoice.invoice_date }}
+                    </td>
+
+                    <td>
+                        ₹{{ invoice.total_amount }}
+                    </td>
+
+                    <td class="paid">
+                        ₹{{ invoice.paid_amount }}
+                    </td>
+
+                    <td class="balance">
+                        ₹{{ invoice.balance_amount }}
+                    </td>
+
+                    <td>
+
+                        <span class="status">
+                            {{ invoice.status }}
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <div class="cards">
+
+        <div class="card">
+
+            <span class="card-label">
+                INVOICE RECORDS
+            </span>
+
+            <h3>
+                Total Invoices
+            </h3>
+
+            <div class="value">
+                {{ invoices|length }}
+            </div>
+
+        </div>
+
+        <div class="card warning">
+
+            <span class="card-label">
+                CREDIT STATUS
+            </span>
+
+            <h3>
+                Payment Tracking
+            </h3>
+
+            <div class="value">
+                Active
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>

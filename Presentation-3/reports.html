@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports & Analytics</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+    <h1>⛽ Fuel Station Management System</h1>
+    <p>Reports & Analytics</p>
+
+</header>
+
+
+<div class="container">
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-title">
+
+        <div>
+            <h2>Reports & Analytics</h2>
+            <p>Database-generated operational reports</p>
+        </div>
+
+        <a href="/" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <!-- FUEL SALES REPORT -->
+
+    <div class="table-card">
+
+        <h3>⛽ Fuel Sales Report</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Fuel</th>
+                    <th>Litres Sold</th>
+                    <th>Total Revenue</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for row in fuel_report %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ row.fuel_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ row.litres_sold }} L
+                    </td>
+
+                    <td>
+                        ₹{{ row.revenue }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- STOCK REPORT -->
+
+    <div class="table-card">
+
+        <h3>📦 Current Fuel Stock</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Fuel</th>
+                    <th>Current Stock</th>
+                    <th>Total Capacity</th>
+                    <th>Utilization</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for row in stock_report %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ row.fuel_name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ row.current_stock }} L
+                    </td>
+
+                    <td>
+                        {{ row.capacity }} L
+                    </td>
+
+                    <td>
+
+                        {% if row.capacity and row.capacity > 0 %}
+
+                        {{ ((row.current_stock / row.capacity) * 100)|round(1) }}%
+
+                        {% else %}
+
+                        0%
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- PAYMENT REPORT -->
+
+    <div class="table-card">
+
+        <h3>💳 Sales by Payment Type</h3>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Payment Type</th>
+                    <th>Transactions</th>
+                    <th>Total Amount</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for row in payment_report %}
+
+                <tr>
+
+                    <td>
+
+                        <span class="status">
+                            {{ row.payment_type }}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        {{ row.transactions }}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ₹{{ row.amount }}
+                        </strong>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
